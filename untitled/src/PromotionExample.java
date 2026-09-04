@@ -23,5 +23,7 @@ public class PromotionExample {
         int charCode = 44032;
         char ch = (char) charCode;
         System.out.println(ch);
+
+
     }
 }

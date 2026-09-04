@@ -30,6 +30,9 @@ public class Main {
         String testStr = "test";
         System.out.println(testStr.charAt(0));
 
+        Person person3 = new Person(null, 27);
+        person3.speak("hi");
+
 
         int i=1;
 
@@ -39,9 +42,17 @@ public class Main {
         }
     }
 
-    public static class Person{
+    public static class Creature {
+        String name;
+    }
+
+    public static class Person extends Creature{
         String name;
         int age;
+
+        public void speak(String word) {
+            System.out.println(word);
+        }
 
         public Person(String name, int age) {
             this.name = name;
