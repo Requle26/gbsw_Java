@@ -1,50 +1,54 @@
-import java.sql.Array;
-import java.util.Arrays;
-import java.util.Scanner;
-
 public class test {
-    static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("학생 수 입력 : ");
-        int students = scanner.nextInt();
-        System.out.println("");
-        int[] arr = new int[students];
-        for (int i = 0; i < students; i++) {
-            System.out.print(i+1 + " 번째 학생 점수 입력 : ");
-            int scores = scanner.nextInt();
-            arr[i] = scores;
-        }
-        int total = 0;
-        int max = 0;
-        int min = 0;
-        int goodBrainStudent = 0;
-        System.out.println();
-        System.out.println("[점수 목록]");
-        for(int score:arr) {
-            System.out.println(score);
-            total += score;
-            if (score > max) {
-                max = score;
-                min = max;
+    public void solution(int[] arr) {
+        int totalSum = 0;
+        double avg;
+        int maxScore = 0;
+        int maxScoreStu = 0;
+        int minScore = arr[0];
+        int minScoreStu = 0;
+        int upperAvg = 0;
+        for (int i = 0; i < arr.length; i++) {
+            totalSum += arr[i];
+            if (maxScore < arr[i]) {
+                maxScore = arr[i];
+                maxScoreStu = i + 1;
             }
-            if (score < min) {
-                min = score;
+            if (minScore > arr[i]) {
+                minScore = arr[i];
+                minScoreStu = i + 1;
             }
         }
-        double avg = total/students;
-        for(int score:arr) {
-            if (score >= avg) {
-                goodBrainStudent++;
-            }
-        }
-        System.out.println("");
-        System.out.println("총점 : " + total);
-        System.out.printf("평균 : ");
-        System.out.printf("%.1f", avg);
-        System.out.println("");
-        System.out.println("최고점 : " + max);
-        System.out.println("최저점 : " + min);
-        System.out.println("평균 이상 학생 수 : " + goodBrainStudent + "명");
+        avg = (double) totalSum / arr.length;
+        System.out.println("전체 학생의 점수 합계 : " + totalSum);
+        System.out.println("전체 학생의 평균 점수 : " + avg);
+        System.out.println("최고 점수와 해당 점수의 학생 번호 : " + maxScore + ", " + maxScoreStu);
+        System.out.println("최저 점수와 해당 점수의 학생 번호 : " + minScore + ", " + minScoreStu);
+    }
 
+    public void solution2(int[][] arr) {
+        String[] subject = {"국어", "영어", "수학"};
+        int temp = 0;
+        int subjectScore = 0;
+        double avg2;
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                subjectScore += arr[j][i];
+                temp += arr[i][j];
+            }
+            System.out.println(i + 1 + "번째 학생의 세 과목 총점 : " + temp);
+            avg2 = (double) temp / arr[i].length;
+            System.out.println(i + 1 + "번째 학생의 평균 : " + avg2);
+            temp = 0;
+            System.out.println(subject[i] + " 점수 합계 : " + subjectScore);
+            subjectScore = 0;
+        }
+    }
+    void main() {
+        solution2(new int[][]{
+                {80, 75, 90},
+                {95, 85, 70},
+                {60, 90, 85},
+                {88, 92, 96}
+        });
     }
 }
